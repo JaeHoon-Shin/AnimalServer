@@ -93,9 +93,9 @@ app.post('/insert',(req,res)=>{
     var sqlQuery = "insert into todoList (todo_title,todo_content,todo_name,todo_id) VALUES(?,?,?)";
     db.query(sqlQuery,[title,content,name],function(error,result){
         if(error) throw error;
-        res.send(result);
+        
     })
-    
+    res.send();
 })
 
 app.listen(PORT, () => {

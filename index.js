@@ -79,7 +79,25 @@ app.post("/singUp", (req, res) => {
     res.send();
 
 })
+app.get("/list" , (req,res)=>{
+    var sqlQuery = "select * from todoList order by todo_no asc"
+    db.query(sqlQuery,function(error,result){
+        res.send(result);
+    })
+})
+app.post('/insert',(req,res)=>{
+    
+    var id = req.body.id;
+    var title = req.body.title;
+    var name = req.body.name;
 
+    var content = req.body.content;
+    var sqlQuery = "insert into todoList (todo_title,todo_content,todo_name,todo_id) VALUES(?,?,?,?)";
+    db.query(sqlQuery,[title,content,name,id],function(error,result){
+        if(error) throw error;
+    })
+    res.send();
+})
 
 app.listen(PORT, () => {
     console.log(`running on port ${PORT}`);

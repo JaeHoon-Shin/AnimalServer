@@ -86,11 +86,10 @@ app.get("/list" , (req,res)=>{
     })
 })
 app.post('/insert',(req,res)=>{
-    
     var title = req.body.title;
     var name = req.body.name;
-
     var content = req.body.content;
+    console.log(req.body)
     var sqlQuery = "insert into todoList (todo_title,todo_content,todo_name,todo_id) VALUES(?,?,?)";
     db.query(sqlQuery,[title,content,name],function(error,result){
         if(error) throw error;

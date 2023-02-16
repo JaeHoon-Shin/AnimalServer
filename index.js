@@ -128,7 +128,7 @@ app.post('/select', (req, res) => {
             sqlQuery = "select * from todoList order by todo_no desc";
             break;
         case 'both':
-            sqlQuery = `select * from todoList where (todo_title like '%'${value}'%' or todo_name like '%'${value}'%') order by todo_no desc`;
+            sqlQuery = `select * from todoList where (todo_title like '%${value}%' or todo_name like '%${value}%') order by todo_no desc`;
             break;
         case 'title':
             sqlQuery = "select * from todoList where todo_title like ? order by todo_no desc";

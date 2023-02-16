@@ -125,7 +125,7 @@ app.get('/select', (req, res) => {
     var sqlQuery;
     switch (type) {
         case 'ALL':
-            sqlQuery = "select * from todoList order by todo_no desc"
+            sqlQuery = "select * from todoList order by todo_no desc";
             break;
         case 'both':
             sqlQuery = `select * from todoList where (todo_title like '%?%' or todo_name like '%?%') by todo_no desc`;
@@ -140,7 +140,7 @@ app.get('/select', (req, res) => {
 
     db.query(sqlQuery,[value],function(error,result){
         if(error) throw error;
-        res.send("검색완료")
+        res.send(result);
     })
 
 })

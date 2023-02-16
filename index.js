@@ -94,8 +94,29 @@ app.post('/insert',(req,res)=>{
     db.query(sqlQuery,[title,content,name],function(error,result){
         if(error) throw error;
         
+        res.send('저장완료');
     })
-    res.send();
+})
+
+
+app.post('/delete',(req,res)=>{
+    var no = req.body.no;
+    var sqlQuery = "delete from todoList where todo_no = ?"
+    db.query(sqlQuery,[no],function(error,result){
+        if(error) throw error;
+        res.send("삭제완료");
+    })
+})
+app.post('/update',(req,res)=>{
+    var no = req.body.no;
+    var title = req.body.title;
+    var name = req.body.name;
+    var content = req.body.content;
+    var sqlQuery = "update todoList set todo_title = ? , todo_name = ? , todo_ content = ?  where todo_no = ?"
+    db.query(sqlQuery,[title, name, content, no],function(error,result){
+        if(error) throw error;
+        res.send("수정완료");
+    })
 })
 
 app.listen(PORT, () => {

@@ -128,17 +128,17 @@ app.post('/select', (req, res) => {
             sqlQuery = "select * from todoList order by todo_no desc";
             break;
         case 'both':
-            sqlQuery = `select * from todoList where (todo_title like '%?%' or todo_name like '%?%') by todo_no desc`;
+            sqlQuery = `select * from todoList where (todo_title like %${value}% or todo_name like %${value}%) by todo_no desc`;
             break;
         case 'title':
-            sqlQuery = `select * from todoList where todo_title like '%?%' by todo_no desc`;
+            sqlQuery = `select * from todoList where todo_title like %${value}% by todo_no desc`;
             break;
         case 'name':
-            sqlQuery = `select * from todoList where todo_name like '%?%' by todo_no desc`;
+            sqlQuery = `select * from todoList where todo_name like %${value}% by todo_no desc`;
             break;
     }
     console.log(sqlQuery)
-    db.query(sqlQuery, [value], function (error, result) {
+    db.query(sqlQuery, function (error, result) {
         if (error) throw error;
         res.send(result);
     })

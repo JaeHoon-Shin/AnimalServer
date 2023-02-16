@@ -50,7 +50,7 @@ app.post("/login", (req, res) => {
         db.query("select * from member where member_id = ? and member_pass = ?", [id, pass], function (error, result) {
             if (error) throw error;
             if (result.length > 0) {
-                res.join({data:result , meg : '성공'})
+                res.json({data:result , meg : '성공'})
             }
             else {
                 res.send("아이디와 비밀번호가 다릅니다.")
@@ -100,7 +100,6 @@ app.post('/insert', (req, res) => {
     var title = req.body.title;
     var name = req.body.name;
     var content = req.body.content;
-    console.log(req.body)
     var sqlQuery = "insert into todoList (todo_title,todo_content,todo_name) value(?,?,?)";
     db.query(sqlQuery, [title, content, name], function (error, result) {
         if (error) throw error;

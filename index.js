@@ -119,7 +119,7 @@ app.post('/update', (req, res) => {
     })
 })
 
-app.get('/select', (req, res) => {
+app.post('/select', (req, res) => {
     var type = req.body.type;
     var value = req.body.value;
     var sqlQuery;

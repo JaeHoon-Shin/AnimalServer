@@ -80,7 +80,7 @@ app.post("/singUp", (req, res) => {
 
 })
 app.get("/list" , (req,res)=>{
-    var sqlQuery = "select * from todoList order by todo_no asc"
+    var sqlQuery = "select * from todoList order by todo_no desc"
     db.query(sqlQuery,function(error,result){
         res.send(result);
     })

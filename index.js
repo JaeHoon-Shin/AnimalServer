@@ -137,11 +137,11 @@ app.post('/select', (req, res) => {
             sqlQuery = `select * from todoList where todo_name like %?% by todo_no desc`;
             break;
     }
-    console.log(type , value)
-   /*  db.query(sqlQuery,[value],function(error,result){
-        if(error) throw error;
+    
+    db.query(sqlQuery, [value], function (error, result) {
+        if (error) throw error;
         res.send(result);
-    }) */
+    })
 
 })
 

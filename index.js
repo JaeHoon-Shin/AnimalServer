@@ -50,7 +50,7 @@ app.post("/login", (req, res) => {
         db.query("select * from member where member_id = ? and member_pass = ?", [id, pass], function (error, result) {
             if (error) throw error;
             if (result.length > 0) {
-                res.json({data:result , meg : '성공'})
+                res.send({data:result , meg : '성공'})
             }
             else {
                 res.send("아이디와 비밀번호가 다릅니다.")

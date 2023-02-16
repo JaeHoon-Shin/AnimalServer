@@ -118,34 +118,6 @@ app.post('/update', (req, res) => {
         res.send("수정완료");
     })
 })
-
-app.post('/select', (req, res) => {
-    var type = req.body.type;
-    var value = req.body.value;
-    var sqlQuery;
-    switch (type) {
-        case 'ALL':
-            sqlQuery = "select * from todoList order by todo_no desc";
-            break;
-        case 'both':
-            sqlQuery = "select * from todoList where (todo_title like ? or todo_name like ?) order by todo_no desc";
-            break;
-        case 'title':
-            sqlQuery = "select * from todoList where todo_title like ? order by todo_no desc";
-            break;
-        case 'name':
-            sqlQuery = "select * from todoList where todo_name like ? order by todo_no desc";
-            break;
-    }
-    
-    db.query(sqlQuery,['%'+value+'%'], function (error, result) {
-        if (error) throw error;
-        res.send(result);
-        console.log(result)
-    })
-
-})
-
 app.listen(PORT, () => {
     console.log(`running on port ${PORT}`);
 });

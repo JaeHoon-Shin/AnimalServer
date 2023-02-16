@@ -112,7 +112,7 @@ app.post('/update',(req,res)=>{
     var title = req.body.title;
     var name = req.body.name;
     var content = req.body.content;
-    var sqlQuery = "update todoList set todo_title = ? , todo_name = ? , todo_ content = ?  where todo_no = ?"
+    var sqlQuery = "update todoList set todo_title = ? , todo_name = ? , todo_content = ?  where todo_no = ?"
     db.query(sqlQuery,[title, name, content, no],function(error,result){
         if(error) throw error;
         res.send("수정완료");

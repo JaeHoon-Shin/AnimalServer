@@ -138,10 +138,10 @@ app.get('/select', (req, res) => {
             break;
     }
     console.log(type , value)
-    db.query(sqlQuery,[value],function(error,result){
+   /*  db.query(sqlQuery,[value],function(error,result){
         if(error) throw error;
         res.send(result);
-    })
+    }) */
 
 })
 

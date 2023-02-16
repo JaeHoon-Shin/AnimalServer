@@ -23,10 +23,10 @@ const db = mysql.createPool({
     database: 'animal'
 })
 
-app.get('/',function(req,res){
-    
-    db.query("select * from member" , function(error,result){
-        if(error) throw error;
+app.get('/', function (req, res) {
+
+    db.query("select * from member", function (error, result) {
+        if (error) throw error;
         res.send(result);
     })
 });
@@ -79,44 +79,70 @@ app.post("/singUp", (req, res) => {
     res.send();
 
 })
-app.get("/list" , (req,res)=>{
+app.get("/list", (req, res) => {
     var sqlQuery = "select * from todoList order by todo_no desc"
-    db.query(sqlQuery,function(error,result){
+    db.query(sqlQuery, function (error, result) {
         res.send(result);
     })
 })
-app.post('/insert',(req,res)=>{
+app.post('/insert', (req, res) => {
     var title = req.body.title;
     var name = req.body.name;
     var content = req.body.content;
     console.log(req.body)
     var sqlQuery = "insert into todoList (todo_title,todo_content,todo_name) value(?,?,?)";
-    db.query(sqlQuery,[title,content,name],function(error,result){
-        if(error) throw error;
-        
+    db.query(sqlQuery, [title, content, name], function (error, result) {
+        if (error) throw error;
+
         res.send('저장완료');
     })
 })
 
 
-app.post('/delete',(req,res)=>{
+app.post('/delete', (req, res) => {
     var no = req.body.no;
     var sqlQuery = "delete from todoList where todo_no = ?"
-    db.query(sqlQuery,[no],function(error,result){
-        if(error) throw error;
+    db.query(sqlQuery, [no], function (error, result) {
+        if (error) throw error;
         res.send("삭제완료");
     })
 })
-app.post('/update',(req,res)=>{
+app.post('/update', (req, res) => {
     var no = req.body.no;
     var title = req.body.title;
     var name = req.body.name;
     var content = req.body.content;
     var sqlQuery = "update todoList set todo_title = ? , todo_name = ? , todo_content = ?  where todo_no = ?"
-    db.query(sqlQuery,[title, name, content, no],function(error,result){
-        if(error) throw error;
+    db.query(sqlQuery, [title, name, content, no], function (error, result) {
+        if (error) throw error;
         res.send("수정완료");
     })
+})
+
+app.get('/select', (req, res) => {
+    var type = req.body.type;
+    var value = req.body.value;
+    var sqlQuery;
+    switch (type) {
+        case 'ALL':
+            sqlQuery = "select * from todoList order by todo_no desc"
+            break;
+        case 'both':
+            sqlQuery = `select * from todoList where (todo_title like '%?%' or todo_name like '%?%') by todo_no desc`;
+            break;
+        case 'title':
+            sqlQuery = `select * from todoList where todo_title like '%?%' by todo_no desc`;
+            break;
+        case 'name':
+            sqlQuery = `select * from todoList where todo_name like '%?%' by todo_no desc`;
+            break;
+    }
+
+    db.query(sqlQuery,[value],function(error,result){
+        if(error) throw error;
+        res.send("검색완료")
+    })
+
 })
 
 app.listen(PORT, () => {

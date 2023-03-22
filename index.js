@@ -7,19 +7,16 @@ const mysql = require('mysql');
 
 //CORS란 자신이 속하지 않은 다른 도메인, 다른 프로토콜, 혹은 다른 포트에 있는 리소스를 요청하는 cross-origin HTTP 요청 방식이다
 const cors = require('cors');
-
 let corsOption = {
     origin: "*",
     credential: true
 }
-
 app.use(cors(corsOption));
 
 app.use(express.json());
 
 //POST request data의 body로부터 파라미터를 편리하게 추출합니다.
 const bodyParser = require("body-parser"); 
-
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
@@ -129,6 +126,7 @@ app.post('/update', (req, res) => {
         res.send("수정완료");
     })
 })
+
 // 검색 근데 front단에서 하는게 더 간단해보임;;;;;; 
 app.post('/select', (req, res) => {
     var type = req.body.type;

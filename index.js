@@ -30,11 +30,8 @@ const db = mysql.createPool({
 })
 //테스트 확인용
 app.get('/', function (req, res) {
-
-    db.query("select * from member", function (error, result) {
-        if (error) throw error;
-        res.send(result);
-    })
+    res.send("접속확인")
+    
 });
 
 
